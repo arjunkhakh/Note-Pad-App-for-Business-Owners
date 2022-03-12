@@ -5,6 +5,8 @@ const notesData = require('./Develop/db/db.json')
 const PORT = process.env.PORT || 5000;
 const path = require('path')
 
+app.use(express.static(path.join(__dirname, "./Develop/public")));
+
 // Creates a server link for the application
 app.listen(PORT, () => {
     console.log(`Server started on port http://localhost:${PORT}`);
@@ -13,11 +15,6 @@ app.listen(PORT, () => {
 // Get Request to the notes page
 app.get("/notes", (req, res) => {
     res.sendFile(path.join(__dirname, "Develop", "/public/notes.html"));
-  });
-
-// Get Request to the index page
-app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "Develop", "/public/index.html"));
   });
 
 // Sets up the express app to handle data parsing
@@ -34,6 +31,10 @@ app.post("/api/notes", (req, res) => {
       id: uuid.v4(),
     }
 
+// Get Request to the index page
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "Develop", "/public/index.html"));
+});
 
 notesData.push(newNote);
 
