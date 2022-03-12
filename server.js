@@ -4,6 +4,8 @@ const app = express();
 const notesData = require('./Develop/db/db.json')
 const PORT = process.env.PORT || 5000;
 const path = require('path')
+const uuid = require('uuid')
+const fs = require('fs')
 
 app.use(express.static(path.join(__dirname, "./Develop/public")));
 
